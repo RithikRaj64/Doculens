@@ -62,7 +62,7 @@ class KG:
         # )
 
         llm = Groq(
-            model="llama-3.1-70b-versatile",
+            model="llama-3.3-70b-versatile",
             api_key=os.environ.get("GROQ_API_KEY"),
         )
 
@@ -93,15 +93,15 @@ class KG:
         session_id = str(uuid.uuid4())
         session_id = session_id.replace("-", "_")
 
-        try:
-            client.execute(
-                f"CREATE SPACE IF NOT EXISTS space_{session_id}(vid_type=FIXED_STRING(256))"
-            )
-            client.execute(f"USE space_{session_id}")
-        except Exception as e:
-            print(e)
+        # try:
+        #     client.execute(
+        #         f"CREATE SPACE IF NOT EXISTS space_{session_id}(vid_type=FIXED_STRING(256))"
+        #     )
+        #     client.execute(f"USE space_{session_id}")
+        # except Exception as e:
+        #     print(e)
 
-        space_name=f"space_{session_id}"
+        space_name=f"story1"
         edge_types=["relationship"]
         rel_prop_names=["relationship"]
         tags=["entity"]
@@ -218,10 +218,10 @@ class KG:
             retriever=combined_retriever, response_synthesizer=response_synthesizer
         )
 
-        # prompt_template = PromptTemplate(prompt)
-        # self.graph_vector_rag_query_engine.update_prompts(
-        #     {"response_synthesizer:summary_template": prompt_template}
-        # )
+        prompt_template = PromptTemplate(prompt)
+        self.graph_vector_rag_query_engine.update_prompts(
+            {"response_synthesizer:summary_template": prompt_template}
+        )
 
         print("*" * 100)
         print("Hi")

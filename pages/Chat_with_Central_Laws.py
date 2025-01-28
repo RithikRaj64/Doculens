@@ -1,6 +1,6 @@
 import streamlit as st
 
-from utils.prompts import judgements_prompt
+from utils.prompts import source_prompt
 # import speech_recognition as sr
 # from googletrans import Translator
 
@@ -18,7 +18,7 @@ def get_response(query: str):
     kb_details = [{"kb_name": "Central Laws", "kb_path": "./storage/Central Laws"}]
     kg = st.session_state.kg
     prompt = st.session_state.prompt
-    kg.load_knowledge_graph(kb_details=kb_details, prompt=prompt)
+    kg.load_knowledge_graph(kb_details=kb_details, prompt=source_prompt)
     response = kg.query_knowledge_graph(query=query)
     return response
 

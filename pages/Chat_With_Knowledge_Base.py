@@ -3,6 +3,7 @@ import streamlit as st
 # from googletrans import Translator
 
 from menu import menu_with_redirect
+from utils.prompts import source_prompt
 
 menu_with_redirect()
 
@@ -14,10 +15,10 @@ st.title("💬 Chat with your Document")
 
 def get_response(query: str):
     kb_details = st.session_state.kb_details
-    kb_details.append({"kb_name": "Central Laws", "kb_path": "./storage/Central Laws"})
+    # kb_details.append({"kb_name": "Central Laws", "kb_path": "./storage/Central Laws"})
     kg = st.session_state.kg
     prompt = st.session_state.prompt
-    kg.load_knowledge_graph(kb_details=kb_details, prompt=prompt)
+    kg.load_knowledge_graph(kb_details=kb_details, prompt=source_prompt)
     response = kg.query_knowledge_graph(query=query)
     return response
 

@@ -5,17 +5,17 @@ def authenticated_menu():
     # Show a navigation menu for authenticated users
     # st.sidebar.page_link("auth.py", label="Switch accounts")
     st.sidebar.page_link("LegalFlow.py", label="Home", icon="🏠")
-    st.sidebar.page_link(
-        "pages/Chat_with_Central_Laws.py",
-        label="The Constitution Chatbot",
-        icon="⚖️"
-    )
-    if st.session_state.user_type == "Legal Professional":
-        st.sidebar.page_link(
-            "pages/Refer_Judgements.py",
-            label="Refer Judgements",
-            icon="👨‍⚖️"
-        )
+    # st.sidebar.page_link(
+    #     "pages/Chat_with_Central_Laws.py",
+    #     label="The Constitution Chatbot",
+    #     icon="⚖️"
+    # )
+    # if st.session_state.user_type == "Legal Professional":
+    #     st.sidebar.page_link(
+    #         "pages/Refer_Judgements.py",
+    #         label="Refer Judgements",
+    #         icon="👨‍⚖️"
+        # )
     st.sidebar.page_link(
         "pages/Create_Knowledge_Base.py", label="Upload Document", icon="✏️"
     )
