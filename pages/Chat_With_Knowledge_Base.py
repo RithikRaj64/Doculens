@@ -1,6 +1,7 @@
 import streamlit as st
 # import speech_recognition as sr
 # from googletrans import Translator
+import json
 
 from menu import menu_with_redirect
 from utils.prompts import source_prompt
@@ -22,9 +23,18 @@ def get_response(query: str):
     response = kg.query_knowledge_graph(query=query)
     return response
 
+def extract_kb_names(kb_list):
+    kb_names = [kb["kb_name"] for kb in kb_list]
+    return "Chosen Knowledge Bases:\n\n- " + "\n- ".join(kb_names)
+
+
 # Initialize session state for messages if not already done
 if 'messages' not in st.session_state:
     st.session_state. messages = []
+
+if st.session_state.kb_details != []:
+    kb_names = extract_kb_names(st.session_state.kb_details)
+    st.sidebar.write(kb_names)
 
 if st.session_state.kb_details == []:
     st.write("Knowledge Base is not selected")

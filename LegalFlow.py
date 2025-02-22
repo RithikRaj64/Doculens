@@ -18,12 +18,7 @@ user_info = data["user_info"]
 
 
 # Mock Authentication Function (Replace with your actual authentication logic)
-def authenticate(username, password):
-    # Example logic: Replace with actual validation logic
-    # if username == "admin" and password == "password123":
-    #     return True
-    # return False
-
+def debug():
     return True
 
 
@@ -163,13 +158,13 @@ else:
             elif st.session_state.user_type == "Legal Professional":
                 st.session_state.prompt = professional_prompt
     markdown_content = """
-# Welcome to LegalFlow 🏛️  
+# Welcome to Doculens 🔎 
 
-**LegalFlow** is your go-to platform for understanding and navigating complex legal documents. Whether you're a legal professional or a general user, our intelligent chatbot is here to provide accurate, insightful, and easy-to-understand answers to your legal queries.  
+**Doculens** is your intelligent solution for analyzing and interpreting complex documents with ease. Whether you're a researcher, professional, or general user, our AI-driven system streamlines document processing, delivering precise, insightful, and context-aware answers to your queries.  
 
-We aim to bridge the gap between legal complexity and accessibility. By leveraging the latest advancements in AI, our platform delivers unparalleled legal insights to empower users with accurate and actionable information.  
+We bridge the gap between unstructured data and meaningful insights by leveraging advanced AI techniques. With powerful hybrid retrieval and knowledge extraction, **Doculens** empowers you to uncover critical information efficiently and accurately.  
 
-**Simplifying Laws, Empowering Decisions, LegalFlow!**  
+**Decipher Documents, Unveil Insights, Doculens!**
     """
     st.markdown(markdown_content)
 

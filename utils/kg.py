@@ -35,6 +35,7 @@ import json
 import uuid
 
 from utils.retreiver import CustomRetriever
+from utils.formatter import extract_and_format_references
 
 
 class KG:
@@ -63,6 +64,7 @@ class KG:
 
         llm = Groq(
             model="llama-3.3-70b-versatile",
+            # model="deepseek-r1-distill-llama-70b",
             api_key=os.environ.get("GROQ_API_KEY"),
         )
 
@@ -208,11 +210,11 @@ class KG:
 
         response_synthesizer = get_response_synthesizer(response_mode="tree_summarize")
 
-        print("*" * 100)
-        print("Hello")
-        print(response_synthesizer.get_prompts())
-        print(response_synthesizer.get_prompts().keys())
-        print("*" * 100)
+        # print("*" * 100)
+        # print("Hello")
+        # print(response_synthesizer.get_prompts())
+        # print(response_synthesizer.get_prompts().keys())
+        # print("*" * 100)
 
         self.graph_vector_rag_query_engine = RetrieverQueryEngine(
             retriever=combined_retriever, response_synthesizer=response_synthesizer
@@ -223,17 +225,22 @@ class KG:
             {"response_synthesizer:summary_template": prompt_template}
         )
 
-        print("*" * 100)
-        print("Hi")
-        print(
-            self.graph_vector_rag_query_engine.get_prompts()[
-                "response_synthesizer:summary_template"
-            ]
-        )
-        print(self.graph_vector_rag_query_engine.get_prompts().keys())
-        print("*" * 100)
+        # print("*" * 100)
+        # print("Hi")
+        # print(
+        #     self.graph_vector_rag_query_engine.get_prompts()[
+        #         "response_synthesizer:summary_template"
+        #     ]
+        # )
+        # print(self.graph_vector_rag_query_engine.get_prompts().keys())
+        # print("*" * 100)
 
         return True
 
     def query_knowledge_graph(self, query: str):
-        return self.graph_vector_rag_query_engine.query(query).response
+        response = self.graph_vector_rag_query_engine.query(query).response
+        formatted_response = extract_and_format_references(response)
+        print("*" * 100)
+        print(formatted_response)
+        print("*" * 100)
+        return formatted_response
