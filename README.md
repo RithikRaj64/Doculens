@@ -1,28 +1,51 @@
 # LegalFlow
 
-- Create virtual environment with the command
+A tool for legal document processing powered by Streamlit and NebulaGraph.
 
-  ```
-  python -m venv env
-  ```
+## 🚀 Getting Started
 
-- Activate environment with the command
+### 1. Create a Virtual Environment
 
-  ```
-  pip install -r requirements.txt
-  ```
+```bash
+python -m venv env
+```
 
-- Add a `.env` file with the following keys
+### 2. Activate the Environment & Install Dependencies
 
-  ```
-  GROQ_API_KEY = {}
-  NEO4J_PASSWORD = {}
-  ```
+Activate the virtual environment and install the required packages:
 
-- Start your Neo4J server
+```bash
+# On Unix or MacOS
+source env/bin/activate
 
-- Start the application with the command
+# On Windows
+.\env\Scripts\activate
 
-  ```
-  streamlit run LegalFlow.py
-  ```
+pip install -r requirements.txt
+```
+
+### 3. Add Environment Variables
+
+Create a `.env` file in the root directory and add your API key:
+
+```dotenv
+GROQ_API_KEY=your_api_key_here
+```
+
+### 4. Run NebulaGraph Docker Container
+
+Make sure the NebulaGraph container is up and running. You can use Docker Desktop or run:
+
+```bash
+docker-compose up -d
+```
+
+*(Replace with your actual docker command if different.)*
+
+### 5. Start the Application
+
+Run the Streamlit app with:
+
+```bash
+streamlit run LegalFlow.py
+```
