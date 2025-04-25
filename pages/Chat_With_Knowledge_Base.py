@@ -4,7 +4,7 @@ import streamlit as st
 import json
 
 from menu import menu_with_redirect
-from utils.prompts import source_prompt
+from utils.prompts import source_prompt, pta_summary_prompt
 
 menu_with_redirect()
 
@@ -14,11 +14,18 @@ st.title("💬 Chat with your Document")
 # recognizer = sr.Recognizer()
 # translator = Translator()
 
+def intial_summary():
+    kb_details = st.session_state.kb_details
+    # kb_details.append({"kb_name": "Central Laws", "kb_path": "./storage/Central Laws"})
+    kg = st.session_state.kg
+    kg.load_knowledge_graph(kb_details=kb_details, prompt=pta_summary_prompt)
+    response = kg.query_knowledge_graph(query="Analyze")
+    return response
+
 def get_response(query: str):
     kb_details = st.session_state.kb_details
     # kb_details.append({"kb_name": "Central Laws", "kb_path": "./storage/Central Laws"})
     kg = st.session_state.kg
-    prompt = st.session_state.prompt
     kg.load_knowledge_graph(kb_details=kb_details, prompt=source_prompt)
     response = kg.query_knowledge_graph(query=query)
     return response
@@ -40,6 +47,7 @@ if st.session_state.kb_details == []:
     st.write("Knowledge Base is not selected")
 else:
     # Display chat messages from history on app rerun
+    st.session_state.messages.append({"role": "assistant", "content": intial_summary()})
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])
